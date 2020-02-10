@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #di{
+            width: 796px;
+            height: 326px;
+            border: solid 1px black;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #di div{
+            width: 796px;
+            height: 326px;
+            position: absolute;
+            top: 0px;
+            left:796px;
+        }
+        #di div:nth-child(1) {
+            background-image: url("img/202002071748018283.jpg");
+        }
+        #di div:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+        }
+        #di div:nth-child(3) {
+             background-image: url("img/2020020814260359313.jpg");
+        }
+        #di div:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+        }
+
+        ul{
+            list-style: none;
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+        }
+        ul li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #444444;
+            float: left;
+            margin-left: 5px;
+        }
+            /* 动画：实现动态效果位置  位置： 796px  0 */
+        @keyframes in {
+            from{
+                left: 796px;
+            }
+            to{
+                left: 0px;
+            }
+        }
+        /*定义一个class样式：动画需要执行*/
+        #di .movein{
+            animation: in 1s;
+            left: 0px;
+        }
+        @keyframes out {
+            from{
+                left: 0px;
+            }
+            to{
+                left: -796px;
+            }
+        }
+        #di .moveout{
+            animation: out 1s;
+            left: 796px;
+        }
+
+    </style>
+</head>
+<body>
+<!-- 动态效果：先把Html样式写好js-->
+<!-- 创建一个div 用来显示图片-->
+    <div id="di">
+        <div class="moveout"></div>
+        <div class="movein"></div>
+        <div class="moveout"></div>
+        <div class="moveout"></div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+<script src="jquery-3.4.1.min.js"></script>
+<script>
+    $(function() {
+        $("ul li").click(function(){
+            // 点击的是哪个li index()
+            // index 下标 0-length-1
+            var ind = $(this).index()
+            // eq() 取值
+            $("#di div").eq(ind).addClass("movein").removeClass("moveout").siblings('div').removeClass("movein").addClass("moveout")
+            // 图片 显示
+        })
+
+      var i = 0;
+      var interval = setInterval(function() {
+          if (i > 3){
+              i = 0;
+          }
+          $("#di div").eq(i).addClass("movein").removeClass("moveout").siblings('div').removeClass("movein").addClass("moveout")
+          i++
+      },1000)
+      $("#di div").mouseover(function () {
+          clearInterval(interval)
+      })
+        $("#di div").mouseleave(function(){
+            interval = setInterval(function(){
+                if (i > 3){
+                    i = 0;
+                }
+                $("#di div").eq(i).addClass("movein").removeClass("moveout").siblings('div').removeClass("movein").addClass("moveout")
+                i++
+            },1000)
+            })
+        })
+</script>
+</body>
+</html>

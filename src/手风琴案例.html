@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #di{
+            width: 946px;
+            height: 326px;
+            border: solid 1px black;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #di div{
+            width: 50px;
+            height: 326px;
+            float: left;
+        }
+        #di div:nth-child(1) {
+            width: 796px;
+            height: 326px;
+            background-image: url("img/202002071748018283.jpg");
+        }
+        #di div:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+        }
+        #di div:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+        }
+        #di div:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+        }
+
+    </style>
+</head>
+<body>
+    <div id="di">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script src="jquery-3.4.1.min.js"></script>
+<script>
+    $(function(){
+        // 点哪一个元素，哪一个元素就完全显示
+        // 添加样式：样式的方法css() ----> css({"添加样式"："样式值"}) 可添加多个
+        $("#di div").click(function(){
+            $(this).width("796px").css({"transition":"500ms"}).siblings().width("50px")
+        })
+    });
+</script>
+</body>
+</html>

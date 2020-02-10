@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #di {
+            width: 750px;
+            height: 326px;
+            border: solid 1px black;
+            position: relative;
+            margin: auto;
+        }
+        #di div{
+            width: 150px;
+            height: 326px;
+            float: left;
+            position: relative;
+            overflow: hidden;
+        }
+        #di div p{
+            width: 150px;
+            height: 326px;
+            position: absolute;
+            left: 150px;
+        }
+        #di div p:nth-child(1){
+            background-image: url("img/202002071748018283.jpg");
+        }
+        #di div p:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+        }
+        #di div p:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+        }
+        #di div p:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+        }
+
+        #di div:nth-child(2) p:nth-child(1){
+            background-image: url("img/202002071748018283.jpg");
+            background-position: -150px 0px;
+        }
+        #di div:nth-child(2) p:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+            background-position: -150px 0px;
+        }
+        #di div:nth-child(2) p:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+            background-position: -150px 0px;
+        }
+        #di div:nth-child(2) p:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+            background-position: -150px 0px;
+        }
+
+        #di div:nth-child(3) p:nth-child(1){
+            background-image: url("img/202002071748018283.jpg");
+            background-position: -300px 0px;
+        }
+        #di div:nth-child(3) p:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+            background-position: -300px 0px;
+        }
+        #di div:nth-child(3) p:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+            background-position: -300px 0px;
+        }
+        #di div:nth-child(3) p:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+            background-position: -300px 0px;
+        }
+
+        #di div:nth-child(4) p:nth-child(1){
+            background-image: url("img/202002071748018283.jpg");
+            background-position: -450px 0px;
+        }
+        #di div:nth-child(4) p:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+            background-position: -450px 0px;
+        }
+        #di div:nth-child(4) p:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+            background-position: -450px 0px;
+        }
+        #di div:nth-child(4) p:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+            background-position: -450px 0px;
+        }
+
+        #di div:nth-child(5) p:nth-child(1){
+            background-image: url("img/202002071748018283.jpg");
+            background-position: -600px 0px;
+        }
+        #di div:nth-child(5) p:nth-child(2) {
+            background-image: url("img/2020020717082736069.jpg");
+            background-position: -600px 0px;
+        }
+        #di div:nth-child(5) p:nth-child(3) {
+            background-image: url("img/2020020814260359313.jpg");
+            background-position: -600px 0px;
+        }
+        #di div:nth-child(5) p:nth-child(4) {
+            background-image: url("img/2020020919070846679.jpg");
+            background-position: -600px 0px;
+        }
+
+        ul{
+            list-style: none;
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+        }
+        ul li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #444444;
+            float: left;
+            margin-left: 5px;
+        }
+
+        /* 动画：实现动态效果位置  位置： 796px  0 */
+        @keyframes in {
+            from{
+                left: 150px;
+            }
+            to{
+                left: 0px;
+            }
+        }
+        /*定义一个class样式：动画需要执行*/
+        #di .movein{
+            animation: in 1s;
+            left: 0px;
+        }
+        @keyframes out {
+            from{
+                left: 0px;
+            }
+            to{
+                left: -150px;
+            }
+        }
+        #di .moveout{
+            animation: out 1s;
+            left: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="di">
+        <div>
+            <p class="movein"></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <div>
+            <p class="movein"></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <div>
+            <p class="movein"></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <div>
+            <p class="movein"></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <div>
+            <p class="movein"></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <script src="jquery-3.4.1.min.js"></script>
+        <script>
+            /*index() eq(i) each() addClass() removeClass()*/
+            $(function () {
+                $("ul li").click(function(){
+                    var ind = $(this).index()
+                    $("#di div").each(function(e,el){
+                        $(el).children().eq(ind).addClass("movein").removeClass("moveout").siblings().addClass("moveout").removeClass("movein")
+                    })
+                })
+            })
+        </script>
+    </div>
+</body>
+</html>
