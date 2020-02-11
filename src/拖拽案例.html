@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #di{
+            width: 400px;
+            height: 300px;
+            border: solid 1px #444444;
+            position: absolute;
+        }
+        #di .title{
+            height: 40px;
+            border-bottom: solid 1px #444444;
+            line-height: 40px;  // 垂直居中
+            padding-left: 5px;
+            background: linear-gradient(90deg,#ffffff,#000); // 线性渐变
+            cursor: move;// 鼠标移出  // pointer：鼠标变手
+        }
+    </style>
+</head>
+<body>
+<div id="di">
+    <div class="title">这是标题</div>
+    <div class="content">这是内容</div>
+</div>
+<script src="jquery-3.4.1.min.js"></script>
+<script>
+    /* 初始位置--> 相对于屏幕水平和垂直居中 */
+    $(function(){
+        init();
+        $(window).resize(init)
+        function init() {
+            var bleft = ($(window).width() - $("#di").width())/2
+            var btop = ($(window).height() - $("#di").height())/2
+            $("#di").css({
+                "left": bleft + "px",
+                "top": btop + "px"
+            })
+        }
+        // 鼠标按下事件
+        $("#di .title").mousedown(function(e){
+            // e: x,y的坐标-->浏览器显示框的坐标    js事件：出发到了浏览器的行为，事件句柄
+            // 浏览器支持：pageX、clientX、pageY、clientY 兼容性
+            // 鼠标按下时，当前点击处x,y坐标
+            var before_left = e.pageX || e.clientX; // 事件句柄
+            var before_top = e.pageY || e.clientY;
+            var left_offset = $("#di").offset().left;
+            var top_offset = $("#di").offset().top;
+
+            // 鼠标抬起，div固定，不进行移动（开关）
+            var flag = true;
+            $(window).mousemove(function(ev){
+                // 移动时的坐标
+                if(flag) {
+                    var after_left = ev.pageX || ev.clientX; // 事件句柄
+                    var after_top = ev.pageY || ev.clientY;
+                    // offset + (后-前)
+                    $("#di").css({
+                        "top": (after_top - before_top + top_offset) + "px",
+                        "left": (after_left - before_left + left_offset) + "px"
+                    })
+                }
+            }).mouseup(function(){
+                flag = false;
+            })
+        })
+    })
+</script>
+</body>
+</html>

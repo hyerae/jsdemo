@@ -197,7 +197,7 @@
             $(function () {
                 $("ul li").click(function(){
                     var ind = $(this).index()
-                    $("#di div").each(function(e,el){
+                    $("#di div").each(function(e,el){   // each：遍历
                         $(el).children().eq(ind).addClass("movein").removeClass("moveout").siblings().addClass("moveout").removeClass("movein")
                     })
                 })

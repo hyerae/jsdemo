@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: cornflowerblue;
+        }
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #di{
+            width: 50px;
+            height: 60px;
+            perspective: 800px;
+            position: absolute;
+        }
+        #di .imgs{
+            width: 50px;
+            height: 60px;
+            transform-style: preserve-3d;
+            position: absolute;
+        }
+        #di .imgs img{
+            box-shadow: 1px 5px 10px 8px deepskyblue;
+            -webkit-box-reflect: below;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="di">
+    <div class="imgs">
+        <img src="img/walk1_0.png" width="50" height="60">
+        <img src="img/walk1_1.png" width="50" height="60">
+        <img src="img/walk1_2.png" width="50" height="60">
+        <img src="img/walk1_3.png" width="50" height="60">
+        <img src="img/walk1_4.png" width="50" height="60">
+        <img src="img/walk2_0.png" width="50" height="60">
+        <img src="img/walk2_1.png" width="50" height="60">
+        <img src="img/walk2_2.png" width="50" height="60">
+        <img src="img/walk2_3.png" width="50" height="60">
+        <img src="img/walk2_4.png" width="50" height="60">
+    </div>
+</div>
+<script src="jquery-3.4.1.min.js"></script>
+<script>
+    $(function (){
+        var wrapx = 0;
+        var wrapy = 0;
+        $(window).mousedown(function (e) {
+            var before_left = e.pageX || e.clientX;
+            var before_top = e.pageY || e.clientY;
+            var flag = true;
+            $(window).mousemove(function(ev){
+                if(flag){
+                    var after_left = ev.pageX || ev.clientX;
+                    var after_top = ev.pageY || ev.clientY;
+
+                    var aleft = after_left - before_left + wrapx;
+                    var atop = after_top - before_top + wrapy;
+
+                    $("#di .imgs").css({
+                        transform: "rotateX(" + atop + "deg) rotateY("+ aleft + "deg)"
+                    })
+                    wrapx = atop;
+                    wrapy = aleft;
+                }
+            }).mouseup(function () {
+                flag = false;
+            })
+        })
+        init();
+        $(window).resize(init)
+        function init() {
+            var _left = ($(window).width() - $("#di").width()) / 2
+            var _top = ($(window).height() - $("#di").height()) / 2
+            $("#di").css({
+                top: _top + "px",
+                left: _left + "px"
+            })
+            $(".imgs img").each(function(index,element){
+                var deg = 360 / $(".imgs img").length;
+                $(element).css({
+                    transform: "rotateY(" + index * deg + "deg)  translateZ(300px)",
+                    transition: "10s" + index * 0.1 + "s"
+                })
+            });
+        }
+    })
+</script>
+</body>
+</html>
